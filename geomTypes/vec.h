@@ -50,6 +50,11 @@ public:
 		coord[0] = c0; coord[1] = c1; coord[2] = c2; coord[3] = c3;
 	}
 	vec(T* c) { for(unsigned i=0; i<D; i++) coord[i] = c[i]; }
+	/*
+	vec(vec<D_,T> v) : vec() {
+		for(unsigned i=0; i<((d<D)?d:D); i++) coord[i] = v[i];
+	}
+	*/
 
 	/// Destructor
 	~vec() { }
@@ -95,12 +100,11 @@ public:
 	/// @arg nrows number of rows in matrix m
 	/// @arg ncols number of cols in matrix m
 	void rotate(T *m, const unsigned& nrows=4, const unsigned& ncols=4) {
-		if (nrows<D) return;
-		T r[nrows];
-		for (unsigned i=0; i<nrows; i++)
+		vec<D,T> u;
+		for (unsigned i=0; i<(nrows<D?nrows:D); i++)
 			for (unsigned j=0; j<ncols; j++)
-				r[i] += m[i*4 + j] * ((j<D)?coord[j]:(T)0);
-		for(unsigned i=0; i<D; i++) this->coord[i] = r[i];
+				u[i] += m[i*4 + j] * ((j<D)?coord[j]:(T)1);
+		*this = u;
 	}
 
 	///--- Operators ---
@@ -176,8 +180,8 @@ public:
 		for(unsigned i=0; i<D; i++) u[i] = this->coord[i] / v[i];
 		return u;
 	}
-	vec<D,T>& operator /= (const vec<D,T>& v) {
-		for(unsigned i=0; i<D; i++) this->coord[i] /= v[i];
+	vec<D,T>& operator /= (const T& s) {
+		for(unsigned i=0; i<D; i++) this->coord[i] /= s;
 		return *this;
 	}
 
