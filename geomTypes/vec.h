@@ -84,10 +84,7 @@ public:
 
 	/// Normalize
 	/// @retun normalized vector
-	void normalize(void) { T l = length();
-		if (l == 0) return *this;
-		*this /= l;
-	}
+	void normalize(void) { *this /= length(); }
 
 	/// Apply rotation matrix (row-oriented)
 	/// @arg m rotation matrix
@@ -166,16 +163,20 @@ public:
 
 	/// Division operators
 	vec<D,T> operator / (const T& s) const {
+		if (s == (T)0) return *this;
 		vec<D,T> u;
 		for(unsigned i=0; i<D; i++) u[i] = this->coord[i] / s;
 		return u;
 	}
 	vec<D,T> operator / (const vec<D,T>& v) const {
 		vec<D,T> u;
-		for(unsigned i=0; i<D; i++) u[i] = this->coord[i] / v[i];
+		for(unsigned i=0; i<D; i++)
+			if (v[i] != (T)0)
+				u[i] = this->coord[i] / v[i];
 		return u;
 	}
 	vec<D,T>& operator /= (const T& s) {
+		if (s == (T)0) return *this;
 		for(unsigned i=0; i<D; i++) this->coord[i] /= s;
 		return *this;
 	}
