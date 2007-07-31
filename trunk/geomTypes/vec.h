@@ -96,6 +96,7 @@ public:
 		for (unsigned i=0; i<(nrows<d?nrows:d); i++)
 			for (unsigned j=0; j<ncols; j++)
 				u[i] += m[i*nrows + j] * ((j<d)?coord[j]:(T)1);
+		if (d < D) for (unsigned i=d; i<D; i++) u[i] = coord[i];
 		*this = u;
 	}
 
