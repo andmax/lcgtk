@@ -50,6 +50,7 @@ public:
 		coord[0] = c0; coord[1] = c1; coord[2] = c2; coord[3] = c3;
 	}
 	vec(T* c) { for(unsigned i=0; i<D; i++) coord[i] = c[i]; }
+	vec(const vec<D,T>& v) { *this = v; }
 
 	/// Destructor
 	~vec() { }
@@ -103,7 +104,7 @@ public:
 	///--- Operators ---
 
 	/// Assign operator
-	vec<D,T>& operator = (vec<D,T> v) {
+	vec<D,T>& operator = (const vec<D,T>& v) {
 		for(unsigned i=0; i<D; i++) this->coord[i] = v[i];
 		return *this;
 	}
