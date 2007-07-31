@@ -161,6 +161,9 @@ public:
 		for(unsigned i=0; i<D; i++) this->coord[i] *= v[i];
 		return *this;
 	}
+	friend vec<D,T> operator * (const T& s, const vec<D,T>& v) {
+		return v*s;
+	}
 
 	/// Division operators
 	vec<D,T> operator / (const T& s) const {
