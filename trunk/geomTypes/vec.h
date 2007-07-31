@@ -50,11 +50,6 @@ public:
 		coord[0] = c0; coord[1] = c1; coord[2] = c2; coord[3] = c3;
 	}
 	vec(T* c) { for(unsigned i=0; i<D; i++) coord[i] = c[i]; }
-	/*
-	vec(vec<D_,T> v) : vec() {
-		for(unsigned i=0; i<((d<D)?d:D); i++) coord[i] = v[i];
-	}
-	*/
 
 	/// Destructor
 	~vec() { }
@@ -89,21 +84,21 @@ public:
 
 	/// Normalize
 	/// @retun normalized vector
-	vec<D,T> normalize(void) { T l = length();
+	void normalize(void) { T l = length();
 		if (l == 0) return *this;
-		for(unsigned i=0; i<D; i++) coord[i] /= l;
-		return *this;
+		*this /= l;
 	}
 
 	/// Apply rotation matrix (row-oriented)
 	/// @arg m rotation matrix
+	/// @arg d dimension of the vector to be rotated
 	/// @arg nrows number of rows in matrix m
 	/// @arg ncols number of cols in matrix m
-	void rotate(T *m, const unsigned& nrows=4, const unsigned& ncols=4) {
+	void rotate(T *m, const unsigned& d=D, const unsigned& nrows=4, const unsigned& ncols=4) {
 		vec<D,T> u;
-		for (unsigned i=0; i<(nrows<D?nrows:D); i++)
+		for (unsigned i=0; i<(nrows<d?nrows:d); i++)
 			for (unsigned j=0; j<ncols; j++)
-				u[i] += m[i*4 + j] * ((j<D)?coord[j]:(T)1);
+				u[i] += m[i*nrows + j] * ((j<d)?coord[j]:(T)1);
 		*this = u;
 	}
 
@@ -233,6 +228,22 @@ public:
 	inline const T& operator [] (const uint& i) const { return this->coord[i]; }
 
 };
+
+/// Template function to copy vec values with
+/// different dimensions.
+/// Ex.: vec< 4, int > b(1, 2, 3);
+///      vec< 3, int > a;
+///      copyVec( a, b ); /// a = (1, 2, 3, 0)
+///
+/// @arg v1 receive values from v2
+/// @arg v2 copy values
+template <unsigned D, unsigned D_, class T>
+void copyVec( vec< D, T >& v1, const vec< D_, T >& v2 ) {
+
+	for(unsigned i = 0; i < ((D_<D)?D_:D); ++i)
+		v1[i] = v2[i];
+
+}
 
 #endif
 
