@@ -84,10 +84,6 @@ public:
 	/// @return vector length value
 	T length(void) const { return sqrt( this->sqrl() ); }
 
-	/// Normalize
-	/// @retun normalized vector
-	void normalize(void) { *this /= length(); }
-
 	/// Apply rotation matrix (row-oriented)
 	/// @arg m rotation matrix
 	/// @arg d dimension of the vector to be rotated
@@ -103,6 +99,10 @@ public:
 	}
 
 	///--- Operators ---
+
+	/// Normalize vector
+	/// @return normalized vector
+	vec<D,T> normalize(void) { return *this /= length(); }
 
 	/// Assign operator
 	vec<D,T>& operator = (const vec<D,T>& v) {
