@@ -74,7 +74,8 @@ public:
 	vec<2,T> rg(void) const { if (D>1) return vec<2,T>(coord[0], coord[1]); }
 	vec<3,T> xyz(void) const { if (D>2) return vec<3,T>(coord[0], coord[1], coord[2]); }
 	vec<3,T> rgb(void) const { if (D>2) return vec<3,T>(coord[0], coord[1], coord[2]); }
-	inline const T* v(void) const { if (D>2) return coord; }
+	inline const T* v(void) const { return coord; }
+	inline const T* p(void) const { if (D>3) return vec<4,T>(coord[0], coord[1], coord[2], 1.0).v(); }
 
 	///--- Math functions ---
 
