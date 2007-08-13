@@ -104,6 +104,8 @@ public:
 	/// Normalize vector
 	/// @return normalized vector
 	vec<D,T> normalize(void) { return *this /= length(); }
+	/// @arg l length used to normalize
+	vec<D,T> normalize(const T& l) { return *this /= l; }
 
 	/// Assign operator
 	vec<D,T>& operator = (const vec<D,T>& v) {
