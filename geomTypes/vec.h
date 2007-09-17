@@ -90,7 +90,7 @@ public:
 	/// @arg d dimension of the vector to be rotated
 	/// @arg nrows number of rows in matrix m
 	/// @arg ncols number of cols in matrix m
-	void rotate(T *m, const unsigned& d=D, const unsigned& nrows=4, const unsigned& ncols=4) {
+	void rotate(const T *m, const unsigned& d=D, const unsigned& nrows=4, const unsigned& ncols=4) {
 		vec<D,T> u;
 		for (unsigned i=0; i<(nrows<d?nrows:d); i++)
 			for (unsigned j=0; j<ncols; j++)
@@ -223,8 +223,10 @@ public:
 
 	/// I/O operator
 	inline friend ostream& operator << (ostream& out, const vec<D,T>& v) {
-		for(unsigned i=0; i<D; ++i)
+		if (D==0) return out;
+		for(unsigned i=0; i<D-1; ++i)
 			out << v.coord[i] << " ";
+		out << v.coord[D-1];
 		return out;
 	}
 	inline friend istream& operator >> (istream& in, vec<D,T>& v) {
