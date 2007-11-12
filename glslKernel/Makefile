@@ -1,17 +1,23 @@
 #
-# Makefile for glsl
+# Makefile for glslKernel library
 #
 
+CC = gcc
 CXX = g++
 
-CFLAGS = -g -Wall -Wno-deprecated -D_NVIDIA_
+CFLAGS = -Wall
+CXXFLAGS = -Wall -Wno-deprecated
 
 #--------------------------------------------
 
-glslKernel.o: glslKernel.h
+libglslKernel.a: GLee.o glslKernel.o
+	ar -rs libglslKernel.a GLee.o glslKernel.o
 
-.cc.o:
-	$(CXX) -c $(CFLAGS) $<
+GLee.o: GLee.c
+	$(CC) -c $(CFLAGS) GLee.c
+
+glslKernel.o: glslKernel.cc glslKernel.h
+	$(CXX) -o glslKernel.o -c $(CXXFLAGS) glslKernel.cc
 
 clean:
-	rm -f *.o *~
+	rm -f *.a *.o *~

@@ -1,42 +1,82 @@
-///
-///        glslKernel.cc
-///
-///   Base class for GLSL application
-///
+/**
+ *
+ *        glslKernel.h
+ *
+ *  Base class for GLSL application using GLee
+ *  Note: To read more about OpenGL Easy Extension (GLee)
+ *  library go to:   http://elf-stone.com/glee.php
+ *
+ *  Authors:
+ *    Claudio Esperanca -- esperanc@lcg.ufrj.br
+ *    Andre Maximo -- andre@lcg.ufrj.br
+ *
+ *  Location:
+ *    Computer Graphics Laboratory (LCG) in
+ *    Rio de Janeiro Federal University (UFRJ)
+ *    www.lcg.ufrj.br
+ *
+ *  Date:
+ *    Created in August, 2005
+ *    Last update in October, 2007
+ *
+ **/
 
-/// A simple GLSL Kernel containing at most one vertex shader and one 
-/// fragment shader
+#include "GLee.h"
+
+///
+/// Each GLSL Kernel contains one GLSL program with shaders
+/// Note: To read more about OpenGL Shading Language (GLSL)
+/// programming go to:   http://www.opengl.org/documentation/glsl/
+///
 class glslKernel {
+
 	GLuint programObject;    ///< The GLSL program
+	GLuint geometryShader;   ///< Geometry Shader
 	GLuint fragmentShader;   ///< Fragment Shader
 	GLuint vertexShader;     ///< Vertex Shader
-	const char** fragSource; ///< Fragment program source
-	const char** vtxSource;  ///< Vertex program source
-	const char* fragFileName; ///< Fragment program source filename
-	const char* vtxFileName;  ///< Vertex program source filename
+	const GLchar** geomSource; ///< Geometry shader source
+	const GLchar** fragSource; ///< Fragment shader source
+	const GLchar** vtxSource;  ///< Vertex shader source
+	const GLchar* geomFileName; ///< Geometry shader source filename
+	const GLchar* fragFileName; ///< Fragment shader source filename
+	const GLchar* vtxFileName;  ///< Vertex shader source filename
+	GLint geomVtxOut;  ///< Geometry Shader maximum number of output vertices
+	GLint geomTypeIn;  ///< Geometry Shader input primitive type
+	GLint geomTypeOut; ///< Geometry Shader output primitive type
 
 public:
 	/// Constructor
-	/// @arg frag_source array of strings containing fragment program
-	/// @arg vtx_source array of strings containing fragment program
-	glslKernel (const char ** frag_source = 0, const char ** vtx_source = 0);
+	/// @arg geom_source array of strings containing geometry shader source
+	/// @arg frag_source array of strings containing fragment shader source
+	/// @arg vtx_source array of strings containing vertex shader source
+	glslKernel (const GLchar ** geom_source = 0,
+		    const GLchar ** frag_source = 0,
+		    const GLchar ** vtx_source = 0);
 
 	/// Destructor
 	~glslKernel ();
 
+	/// Sets the name of a geometry shader source file
+	/// @arg filename name of geometry shader source file
+	void geometry_source (const GLchar* filename);
+
 	/// Sets the name of a fragment shader file
 	/// @arg filename name of fragment source file
-	void fragment_source (const char* filename);
+	void fragment_source (const GLchar* filename);
 
 	/// Sets the name of a vertex shader file
 	/// @arg filename name of vertex source file
-	void vertex_source (const char* filename);
+	void vertex_source (const GLchar* filename);
 
-	/// Tells whether the system has OpenGL SL capabilities
+	/// Tells whether the system support OpenGL SL capabilities
 	/// @return true if the system is ready for OpenGL SL
-	bool has_GLSL ();
+	bool glsl_support ();
 
-	/// Tells whether the shader program is ready to run
+	/// Tells whether graphics board support Geometry Shader
+	/// @return true if the graphics board could run Geometry Shader
+	bool geom_shader_support ();
+
+	/// Tells whether the GLSL program is ready to run
 	/// @return true if and only if a program object was built
 	bool installed ();
 
@@ -151,4 +191,17 @@ public:
 	/// @arg name name of attribute variable
 	/// @arg location index of attribute variable
 	void bind_attribute_location (const GLchar* name, GLint index);
+
+	/// Sets the maximum number of output vertices by the Geometry Shader
+	/// @arg vtx_out maximum number of output vertices
+	void set_geom_max_output_vertices (const GLint& vtx_out);
+
+	/// Sets the input primitive type
+	/// @arg type_in input primitive type
+	void set_geom_input_type (const GLint& type_in);
+
+	/// Sets the output primitive type
+	/// @arg type_out output primitive type
+	void set_geom_output_type (const GLint& type_out);
+
 };
