@@ -263,8 +263,6 @@ void glslKernel::install (bool debug) {
 		assert (vtxSource || fragSource || geomSource ||
 			vtxFileName || fragFileName || geomFileName);
 
-		assert ((geomSource || geomFileName) && (vtxSource || vtxFileName));
-
 		programObject = glCreateProgram();
 
 		assert( programObject != 0 );
