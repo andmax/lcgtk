@@ -419,7 +419,8 @@ void glslKernel::get_uniform (const GLchar* name, GLfloat *p) {
 
 }
 
-/// Sets a {1|2|3|4}-{integer|float} uniform value by {name|location}
+/// Sets a {1|2|3|4}-{integer|float|double} uniform value by {name|location}
+/// converting double (not accepted) to float
 /// @arg name name of uniform variable
 /// @arg location location handle of uniform variable
 /// @arg a first value
@@ -500,6 +501,44 @@ void glslKernel::set_uniform (const GLchar* name, GLfloat a, GLfloat b) {
 	set_uniform (location, a, b);
 }
 void glslKernel::set_uniform (const GLchar* name, GLfloat a) {
+	GLint location = get_uniform_location (name);
+	set_uniform (location, a);
+}
+/// location & double
+void glslKernel::set_uniform (GLint location, GLdouble a, GLdouble b, GLdouble c, GLdouble d) {
+	assert (location != -1);
+	glUniform4f (location, (GLfloat)a, (GLfloat)b, (GLfloat)c, (GLfloat)d);
+	assert (!error_check());
+}
+void glslKernel::set_uniform (GLint location, GLdouble a, GLdouble b, GLdouble c) {
+	assert (location != -1);
+	glUniform3f (location, (GLfloat)a, (GLfloat)b, (GLfloat)c);
+	assert (!error_check());
+}
+void glslKernel::set_uniform (GLint location, GLdouble a, GLdouble b) {
+	assert (location != -1);
+	glUniform2f (location, (GLfloat)a, (GLfloat)b);
+	assert (!error_check());
+}
+void glslKernel::set_uniform (GLint location, GLdouble a) {
+	assert (location != -1);
+	glUniform1f (location, (GLfloat)a);
+	assert (!error_check());
+}
+/// name & double
+void glslKernel::set_uniform (const GLchar* name, GLdouble a, GLdouble b, GLdouble c, GLdouble d) {
+	GLint location = get_uniform_location (name);
+	set_uniform (location, a, b, c, d);
+}
+void glslKernel::set_uniform (const GLchar* name, GLdouble a, GLdouble b, GLdouble c) {
+	GLint location = get_uniform_location (name);
+	set_uniform (location, a, b, c);
+}
+void glslKernel::set_uniform (const GLchar* name, GLdouble a, GLdouble b) {
+	GLint location = get_uniform_location (name);
+	set_uniform (location, a, b);
+}
+void glslKernel::set_uniform (const GLchar* name, GLdouble a) {
 	GLint location = get_uniform_location (name);
 	set_uniform (location, a);
 }
