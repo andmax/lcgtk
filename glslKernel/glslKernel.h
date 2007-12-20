@@ -100,7 +100,8 @@ public:
 	///        depends on the size of the uniform as specified in the shader prog.
 	void get_uniform (const GLchar* name, GLfloat *p);
 
-	/// Sets a {1|2|3|4}-{integer|float} uniform value by {name|location}
+	/// Sets a {1|2|3|4}-{integer|float|double} uniform value by {name|location}
+	/// converting double (not accepted) to float
 	/// @arg name name of uniform variable
 	/// @arg location location handle of uniform variable
 	/// @arg a first value
@@ -123,6 +124,14 @@ public:
 	void set_uniform (const GLchar* name, GLfloat a, GLfloat b, GLfloat c);
 	void set_uniform (const GLchar* name, GLfloat a, GLfloat b);
 	void set_uniform (const GLchar* name, GLfloat a);
+	void set_uniform (GLint location, GLdouble a, GLdouble b, GLdouble c, GLdouble d);
+	void set_uniform (GLint location, GLdouble a, GLdouble b, GLdouble c);
+	void set_uniform (GLint location, GLdouble a, GLdouble b);
+	void set_uniform (GLint location, GLdouble a);
+	void set_uniform (const GLchar* name, GLdouble a, GLdouble b, GLdouble c, GLdouble d);
+	void set_uniform (const GLchar* name, GLdouble a, GLdouble b, GLdouble c);
+	void set_uniform (const GLchar* name, GLdouble a, GLdouble b);
+	void set_uniform (const GLchar* name, GLdouble a);
 
 	/// Sets a {integer|float} uniform vector value by {name|location}
 	/// @arg name name of uniform variable
