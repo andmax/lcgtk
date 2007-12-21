@@ -25,11 +25,11 @@
 
 /// Tells whether the system support OpenGL SL capabilities
 /// @return true if the system is ready for OpenGL SL
-bool glsl_support() { return (GLEE_VERSION_2_0); }
+bool glsl_support();
 
 /// Tells whether graphics board support Geometry Shader
 /// @return true if the graphics board could run Geometry Shader
-bool geom_shader_support () { return (GLEE_EXT_geometry_shader4); }
+bool geom_shader_support ();
 
 ///
 /// Each GLSL Kernel contains one GLSL program with shaders
