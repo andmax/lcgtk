@@ -23,6 +23,14 @@
 
 #include "GLee.h"
 
+/// Tells whether the system support OpenGL SL capabilities
+/// @return true if the system is ready for OpenGL SL
+bool glsl_support() { return (GLEE_VERSION_2_0); }
+
+/// Tells whether graphics board support Geometry Shader
+/// @return true if the graphics board could run Geometry Shader
+bool geom_shader_support () { return (GLEE_EXT_geometry_shader4); }
+
 ///
 /// Each GLSL Kernel contains one GLSL program with shaders
 /// Note: To read more about OpenGL Shading Language (GLSL)
@@ -67,14 +75,6 @@ public:
 	/// Sets the name of a vertex shader file
 	/// @arg filename name of vertex source file
 	void vertex_source (const GLchar* filename);
-
-	/// Tells whether the system support OpenGL SL capabilities
-	/// @return true if the system is ready for OpenGL SL
-	bool glsl_support ();
-
-	/// Tells whether graphics board support Geometry Shader
-	/// @return true if the graphics board could run Geometry Shader
-	bool geom_shader_support ();
 
 	/// Tells whether the GLSL program is ready to run
 	/// @return true if and only if a program object was built
