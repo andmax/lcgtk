@@ -229,22 +229,6 @@ void glslKernel::vertex_source (const char* filename) {
 
 }
 
-/// Tells whether the system support OpenGL SL capabilities
-/// @return true if the system is ready for OpenGL SL
-bool glslKernel::glsl_support() {
-
-	return (GLEE_VERSION_2_0);
-
-}
-
-/// Tells whether graphics board support Geometry Shader
-/// @return true if the graphics board could run Geometry Shader
-bool glslKernel::geom_shader_support () {
-
-	return (GLEE_EXT_geometry_shader4);
-
-}
-
 /// Tells whether the GLSL program is ready to run
 /// @return true if and only if a program object was built
 bool glslKernel::installed () {
