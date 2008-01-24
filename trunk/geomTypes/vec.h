@@ -37,8 +37,8 @@ public:
 	/// Constructor
 	/// @arg cN coordinate N
 	vec() { clear(); }
-	vec(T c0) { if (D<1) return;
-		coord[0] = c0;
+	vec(T c0) { if (D==1) coord[0] = c0;
+		for(unsigned i=0; i<D; i++) coord[i] = c0;
 	}
 	vec(T c0, T c1) { if (D<2) return;
 		coord[0] = c0; coord[1] = c1;
@@ -56,7 +56,7 @@ public:
 	~vec() { }
 
 	/// Clear values
-	void clear(void) { for(unsigned i=0; i<D; i++) coord[i] = (T)0; }
+	void clear(void) { for(unsigned i=0; i<D; i++) coord[i] = T(); }
 
 	///--- Get functions ---
 
@@ -172,7 +172,7 @@ public:
 
 	/// Division operators
 	vec<D,T> operator / (const T& s) const {
-		if (s == (T)0) return *this;
+		if (s == T()) return *this;
 		vec<D,T> u;
 		for(unsigned i=0; i<D; i++) u[i] = this->coord[i] / s;
 		return u;
@@ -180,19 +180,19 @@ public:
 	vec<D,T> operator / (const vec<D,T>& v) const {
 		vec<D,T> u;
 		for(unsigned i=0; i<D; i++)
-			if (v[i] != (T)0)
+			if (v[i] != T())
 				u[i] = this->coord[i] / v[i];
 		return u;
 	}
 	vec<D,T>& operator /= (const T& s) {
-		if (s == (T)0) return *this;
+		if (s == T()) return *this;
 		for(unsigned i=0; i<D; i++) this->coord[i] /= s;
 		return *this;
 	}
 
 	/// Dot product operator
 	T operator ^ (const vec<D,T>& v) const {
-		T s = (T)0;
+		T s = T();
 		for(unsigned i=0; i<D; i++)
 			s += this->coord[i] * v[i];
 		return s;
