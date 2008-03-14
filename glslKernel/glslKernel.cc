@@ -213,6 +213,17 @@ glslKernel::~glslKernel() {
 
 }
 
+/// Size of GLSL Kernel
+/// @return openGL usage in Bytes
+int glslKernel::size_of(void) {
+
+	return ( ( 4 * sizeof(GLuint) ) + ///< All GLuints
+		 ( 3 * sizeof(GLint) ) + ///< All GLints
+		 ( 6 * sizeof(int) ) ///< pointers
+		);
+
+}
+
 /// Sets the name of a geometry shader source file
 /// @arg filename name of geometry shader source file
 void glslKernel::geometry_source (const char* filename) {
