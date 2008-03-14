@@ -64,6 +64,10 @@ public:
 	/// Destructor
 	~glslKernel ();
 
+	/// Size of GLSL Kernel
+	/// @return openGL usage in Bytes
+	int size_of(void);
+
 	/// Sets the name of a geometry shader source file
 	/// @arg filename name of geometry shader source file
 	void geometry_source (const GLchar* filename);
