@@ -64,7 +64,7 @@ public:
 	inline friend ostream& operator << (ostream& out, const errHandle& err) {
 
 		if (err.e == genericErr)
-			out << "Generic error";
+			out << ( (!err.str) ? "Generic error" : err.str );
 
 		if (err.e == usageErr)
 			out << "Error reading arguments!\n" << err.str;
