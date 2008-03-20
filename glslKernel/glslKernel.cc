@@ -107,7 +107,8 @@ static void printProgramInfoLog (GLuint obj) {
 }
 
 /// Returns 1 if an OpenGL error occurred, 0 otherwise.
-static int error_check () {
+/// @arg str error string specifying where the error occurs
+static int error_check (char* str = NULL) {
 
 	GLenum glErr;
 	int retCode = 0;
@@ -116,7 +117,8 @@ static int error_check () {
 
 	while (glErr != GL_NO_ERROR) {
 
-		cerr << "glError : " << gluErrorString(glErr) << "\n";
+		cerr << "glError : " << gluErrorString(glErr) << " : "
+		     << str << "\n";
 		retCode = 1;
 		glErr = glGetError();
 
@@ -287,12 +289,12 @@ void glslKernel::install (bool debug) {
 
 			}
 
-			assert (!error_check());
+			assert (!error_check("Creating Geometry Shader"));
 
 			glCompileShader (geometryShader);
 
 			if (debug) printShaderInfoLog (geometryShader);
-			assert (!error_check());
+			assert (!error_check("Compiling Geometry Shader"));
 
 			GLint compileGeom;
 			glGetShaderiv (geometryShader, GL_COMPILE_STATUS, &compileGeom);
@@ -304,7 +306,7 @@ void glslKernel::install (bool debug) {
 			glProgramParameteriEXT (programObject, GL_GEOMETRY_INPUT_TYPE_EXT, geomTypeIn);
 			glProgramParameteriEXT (programObject, GL_GEOMETRY_OUTPUT_TYPE_EXT, geomTypeOut);
 
-			assert (!error_check());
+			assert (!error_check("Attaching Geometry Shader"));
 
 		}
 
@@ -325,19 +327,19 @@ void glslKernel::install (bool debug) {
 
 			}
 
-			assert (!error_check());
+			assert (!error_check("Creating Fragment Shader"));
 
 			glCompileShader (fragmentShader);
 
 			if (debug) printShaderInfoLog (fragmentShader);
-			assert (!error_check());
+			assert (!error_check("Compiling Fragment Shader"));
 
 			GLint compileFrag;
 			glGetShaderiv (fragmentShader, GL_COMPILE_STATUS, &compileFrag);
 			assert (compileFrag == GL_TRUE);
 
 			glAttachShader (programObject, fragmentShader);
-			assert (!error_check());
+			assert (!error_check("Attaching Fragment Shader"));
 		}
 
 		if (vtxSource || vtxFileName) {
@@ -357,17 +359,19 @@ void glslKernel::install (bool debug) {
 
 			}
 
+			assert (!error_check("Creating Vertex Shader"));
+
 			glCompileShader (vertexShader);
 
 			if (debug) printShaderInfoLog (vertexShader);
-			assert (!error_check());
+			assert (!error_check("Compiling Vertex Shader"));
 
 			GLint compileVertex;
 			glGetShaderiv (vertexShader, GL_COMPILE_STATUS, &compileVertex);
 			assert (compileVertex == GL_TRUE);
 
 			glAttachShader (programObject, vertexShader);
-			assert (!error_check());
+			assert (!error_check("Attaching Vertex Shader"));
 
 		}
 
@@ -393,7 +397,7 @@ void glslKernel::install (bool debug) {
 void glslKernel::use (bool use_kernel) {
 
 	glUseProgram (use_kernel?programObject:0);
-	assert (!error_check());
+	assert (!error_check("Using shaders"));
 
 }
 
