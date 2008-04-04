@@ -212,12 +212,12 @@ public:
 	/// Equality
 	friend bool operator == ( const vec<D,T>& v1, const vec<D,T>& v2 ) {
 		bool b = true;
-		for(unsigned i=0; i<D; ++i) b = b && (v1[i] == v2[i]);
+		for(unsigned i=0; i<D; ++i) b = (b && (v1[i] == v2[i]));
 		return b;
 	}  
 	friend bool operator == ( const vec<D,T>& v1, T& v2 ) {
 		bool b = true;
-		for(unsigned i=0; i<D; ++i) b = b && (v1[i] == v2);
+		for(unsigned i=0; i<D; ++i) b = (b && (v1[i] == v2));
 		return b;
 	}  
 
