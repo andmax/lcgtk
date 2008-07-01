@@ -20,6 +20,9 @@
  *    Last update in October, 2007
  *
  **/
+ 
+#ifndef __GLSL__KERNEL__
+#define __GLSL__KERNEL__
 
 #include "GLee.h"
 
@@ -218,3 +221,6 @@ public:
 	void set_geom_output_type (const GLint& type_out);
 
 };
+
+#endif /*__GLSL__KERNEL__*/
+
