@@ -105,11 +105,11 @@ namespace LAL
 			 */
 			inline  float operator [] ( int i)  const
 			{
-				if ( (i > 2) or ( i < 0))
+				if ( (i > 3) or ( i < 0))
 				{
-					std::cerr << "[ERROR] Point3 operator[]"        << std::endl
+					std::cerr << "[ERROR] Color operator[]"        << std::endl
 						      << "        Out of ranger. " 			<< std::endl
-						      << "        Accepts, 0 , 1 , 2 only." << std::endl;
+						      << "        Accepts, 0 , 1 , 2, 3 only." << std::endl;
 					exit(1);
 				}
 				
@@ -123,11 +123,11 @@ namespace LAL
 			inline  float operator [] ( int i)  
 		
 			{
-				if ( (i > 2) or ( i < 0))
+				if ( (i > 3) or ( i < 0))
 				{
 					std::cerr << "[ERROR] Point3 operator[]"        << std::endl
 						      << "        Out of ranger. " 			<< std::endl
-						      << "        Accepts, 0 , 1 , 2 only." << std::endl;
+						      << "        Accepts, 0 , 1 , 2, 3 only." << std::endl;
 					exit(1);
 				}
 				  
