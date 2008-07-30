@@ -17,14 +17,14 @@ namespace LAL
 *@version 1.0.
 *@date 27-Feb-2008.
 *@todo OpenGL interface and a C style array.
-*@todo Anather model of color representation like HLS  
-*/	
+*@todo Anather model of color representation like HLS
+*/
 
 	class Color
 	{
-		
+
 		public:
-									
+
 			Color()
 			{
 				this->mRed   = 0.0;
@@ -32,44 +32,44 @@ namespace LAL
 				this->mBlue  = 0.0;
 				this->mAlfa  = 0.0;
 			};
-			
+
 			Color(const float&pRed,const float&pGreen, const float&pBlue)
 				: mRed(pRed), mGreen(pGreen), mBlue(pBlue), mAlfa(0) {};
-				
+
 			Color(const float&pRed, const float&pGreen, const float& pBlue, const float& pAlfa)
 				: mRed(pRed), mGreen(pGreen), mBlue(pBlue), mAlfa(pAlfa) {};
-				
-			template < typename C >				
+
+			template < typename C >
 			Color (const Point3<C>& pPoint )
 				: mRed(pPoint.x()), mGreen(pPoint.y()), mBlue(pPoint.z()), mAlfa(0) {};
-				
-			template < typename C >				
+
+			template < typename C >
 			Color (const Vector3<C>& pVector )
 				: mRed(pVector.x()), mGreen(pVector.y()), mBlue(pVector.z()), mAlfa(0) {};
-			
+
 			template < typename C >
 			inline void setRGB ( const C* pC)
 			{
 		    	this->mRed   = static_cast< float > ( pC[0] );
 		    	this->mGreen = static_cast< float > ( pC[1] );
 		    	this->mBlue  = static_cast< float > ( pC[2] );
-			};	
+			};
 			/*!@brief Initialize RGB color.
 			*  @param[in] r float.
 			*  @param[in] g float.
-			*  @param[in] b float. 
-			*/		
-			inline void setRGB ( const float& pRed, const float& pGreen, const float& pBlue) 
+			*  @param[in] b float.
+			*/
+			inline void setRGB ( const float& pRed, const float& pGreen, const float& pBlue)
 			{
 		    	this->mRed   = pRed;
 		    	this->mGreen = pGreen;
 		    	this->mBlue  = pBlue;
 			};
-				
+
 			/*!@brief Initialize Red color.
 			*  @param[in] r float.
-			*/				
-			inline void setRed ( const float& pRed) 
+			*/
+			inline void setRed ( const float& pRed)
 			{
 		    	this->mRed   = pRed;
 			};
@@ -84,20 +84,20 @@ namespace LAL
 
 			/*!@brief Initialize Blue color.
 			*  @param[in] b float.
-			*/		
+			*/
 			inline void setBlue ( const float& pBlue)
 			{
 		    	this->mBlue  = pBlue;
 			};
-			
+
 			/*!@brief Initialize Alfa atribute.
 			*  @param[in] b float.
-			*/		
+			*/
 			inline void setAlfa ( const float& pAlfa)
 			{
 		    	this->mAlfa  = pAlfa;
 			};
-			
+
 			/*!@brief operator[]
 			 * @details array based index. "0" for x, "1" for y, "2" for z.
 			 * @ This is ready-only
@@ -112,7 +112,7 @@ namespace LAL
 						      << "        Accepts, 0 , 1 , 2, 3 only." << std::endl;
 					exit(1);
 				}
-				
+
 			    return (mRGB[i]);
 			};
 			/*!@brief operator[]
@@ -120,20 +120,20 @@ namespace LAL
 			 * @note Acept assigement
 			 * @return float.
 			 */
-			inline  float operator [] ( int i)  
-		
+			inline  float operator [] ( int i)
+
 			{
 				if ( (i > 3) or ( i < 0))
 				{
-					std::cerr << "[ERROR] Point3 operator[]"        << std::endl
+					std::cerr << "[ERROR] Color operator[]"        << std::endl
 						      << "        Out of ranger. " 			<< std::endl
 						      << "        Accepts, 0 , 1 , 2, 3 only." << std::endl;
 					exit(1);
 				}
-				  
+
 			    return (mRGB[i]);
 			};
-				
+
 			/*!@brief operator=
 			 * @details Assigment operator
 			 * @return Point3
@@ -144,21 +144,21 @@ namespace LAL
 				this->mGreen = pColor.mGreen;
 				this->mBlue  = pColor.mBlue;
 				this->mAlfa  = pColor.mAlfa;
-					
+
 				return ( *this );
 			};
-			
-			
+
+
 			/*!@brief operator==
 			 * @details Two points are identical whether your correspondents abscissa are equal.
 			 * @return bool.
 			 */
 			inline bool operator== ( const Color& pColor) const
 			{
-				return ( ( this->mRed   == pColor.mRed   ) and 
-						 ( this->mGreen == pColor.mGreen ) and 
+				return ( ( this->mRed   == pColor.mRed   ) and
+						 ( this->mGreen == pColor.mGreen ) and
 						 ( this->mBlue  == pColor.mBlue  ) );
-			};	
+			};
 			/*!@brief operator!=
 			 * @details Opposite to the operator==
 			 * @see operator==
@@ -167,39 +167,39 @@ namespace LAL
 			inline bool operator!= ( const Color& pColor) const
 			{
 				return  !(*this == pColor) ;
-			};	
+			};
 
-			
+
 			/*!@brief operator<<
 			 * @details For debug
 			 */
 			friend inline std::ostream& operator<< (std::ostream & s, const Color& pColor)
 			{
-				s << "Color" << " Red = "    << pColor.mRed 
-							 << " ,Green = " << pColor.mGreen 
+				s << "Color" << " Red = "    << pColor.mRed
+							 << " ,Green = " << pColor.mGreen
 							 << " ,Blue = "  << pColor.mBlue << std::endl;
-				
-				
+
+
 				return ( s );
 			};
-			
+
 			virtual ~Color(){};
-		
+
 		private:
-			
+
 			union
 			{
 				struct
-				{	
-					float mRed;   /*!< Red color atribute.   */  
+				{
+					float mRed;   /*!< Red color atribute.   */
 					float mGreen; /*!< Green color atribute. */
 					float mBlue;  /*!< Blue color atribute.  */
 					float mAlfa ; /*!< Alfa color atribute.  */
 				};
-				
+
 				float mRGB[4];/*!< Array of color atributes.*/
 			};
-			
+
 	};
 
 }/* LAL::NAMESPACE */
