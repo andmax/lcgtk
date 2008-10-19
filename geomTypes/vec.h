@@ -236,8 +236,8 @@ public:
 	}
 
 	/// Operator to grant read/write access to coordinate values
-	inline T& operator [] (const uint& i) { return this->coord[i]; }
-	inline const T& operator [] (const uint& i) const { return this->coord[i]; }
+	inline T& operator [] (const unsigned& i) { return this->coord[i]; }
+	inline const T& operator [] (const unsigned& i) const { return this->coord[i]; }
 	inline const T* operator &(void) const { return coord; }
 
 };
