@@ -5,8 +5,8 @@
 CC = gcc
 CXX = g++
 
-#RM = rm -f
-RM = del
+RM = rm -f
+#RM = del
 
 CFLAGS = -Wall
 CXXFLAGS = -Wall -Wno-deprecated
