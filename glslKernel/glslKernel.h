@@ -24,7 +24,7 @@
 #ifndef __GLSL__KERNEL__
 #define __GLSL__KERNEL__
 
-#include <GL/GLee.h>
+#include "GLee.h"
 
 /// Tells whether the system support OpenGL SL capabilities
 /// @return true if the system is ready for OpenGL SL

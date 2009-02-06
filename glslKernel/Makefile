@@ -2,22 +2,31 @@
 # Makefile for glslKernel library
 #
 
-CC = gcc
 CXX = g++
 
-RM = rm -f
-#RM = del
+RM = rm -f # Linux
+#RM = del # Windows
 
-CFLAGS = -Wall
-CXXFLAGS = -Wall -Wno-deprecated
+# Enter the correct include directory where the GLee.h
+# file is, or simply comment it (in case it is in the
+# current directory)
 
-#--------------------------------------------
+CXXFLAGS = -Wall -Wno-deprecated #-I/usr/include/GL/GLee
+
+# If you don't want to GLee to be joined with glslKernel
+# comment the next line (to generate the GLee.o file just
+# compile it using $ gcc -c GLee.c)
+
+GLee = GLee.o
+
+#-----------------------------------------------------------
 
 libglslKernel.a: glslKernel.o
-	ar -rs libglslKernel.a glslKernel.o
+	ar -rs libglslKernel.a glslKernel.o $(GLee)
 
 glslKernel.o: glslKernel.cc glslKernel.h
 	$(CXX) -o glslKernel.o -c $(CXXFLAGS) glslKernel.cc
 
 clean:
-	$(RM) *.a *.o
+	$(RM) *.a *.o *~
+
