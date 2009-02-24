@@ -108,7 +108,7 @@ static void printProgramInfoLog (GLuint obj) {
 
 /// Returns 1 if an OpenGL error occurred, 0 otherwise.
 /// @arg str error string specifying where the error occurs
-static int error_check (char* str = NULL) {
+static int error_check (const char* str = NULL) {
 
 	GLenum glErr;
 	int retCode = 0;
