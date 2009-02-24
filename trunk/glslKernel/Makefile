@@ -10,14 +10,15 @@ RM = rm -f # Linux
 # Enter the correct include directory where the GLee.h
 # file is, or simply comment it (in case it is in the
 # current directory)
+INCLUDE = -I$(HOME)/lcgtk
 
-CXXFLAGS = -Wall -Wno-deprecated #-I/usr/include/GL/GLee
+CXXFLAGS = -Wall -Wno-deprecated $(INCLUDE)
 
 # If you don't want to GLee to be joined with glslKernel
 # comment the next line (to generate the GLee.o file just
 # compile it using $ gcc -c GLee.c)
 
-GLee = GLee.o
+#GLee = GLee.o
 
 #-----------------------------------------------------------
 
