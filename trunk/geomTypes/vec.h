@@ -84,7 +84,7 @@ public:
 	/// Angle between vectors
 	/// @arg v vector to compute the angle with
 	/// @return angle in radians between this vector and v
-	T angle(const vec<D,T>& v) const { return acos( ( (*this) ^ v ) / ( this->sqrl() * v.sqrl() ) ); }
+	T angle(const vec<D,T>& v) const { return acos( ( (*this) ^ v ) / ( this->length() * v.length() ) ); }
 
 	/// Apply rotation matrix (row-oriented)
 	/// @arg m rotation matrix
@@ -167,8 +167,8 @@ public:
 		for(unsigned i=0; i<D; i++) this->coord[i] *= v[i];
 		return *this;
 	}
-	friend vec<D,T> operator * (const T& s, const vec<D,T>& v) {
-		return v*s;
+	inline friend vec<D,T> operator * (const T& s, const vec<D,T>& v) {
+		return v * s;
 	}
 
 	/// Division operators
