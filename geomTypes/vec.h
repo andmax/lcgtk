@@ -1,11 +1,7 @@
 /**
- *   Generic Vectors Class
+ *   Generic Vector Class
  *
- * File: vec.h
- *
- * Author: Andre Maximo (andmax@gmail.com)
- *
- * Date: Jul 30, 2007
+ * Maximo, Andre -- Mar, 2009
  *
  **/
 
@@ -17,14 +13,14 @@
 #include <iostream>
 #include <cmath>
 
-using namespace std;
-
 /// ------------------------------------------   Vec   ---------------------------------------------
 
-/// Template class for an array of values, such as vector or points,
-/// where the dimension is also defined as template.
-/// Ex.: vec< 3, double > p; defines a point p in R^3 with double
-/// precision coordinates.
+/**
+ *    Template class for an array of values, such as vector or points, where the dimension is also
+ *  defined as template, e.g. vec< 3, double > p; defines a point p in R^3 with double precision
+ *  coordinates. Note that it was supposed to be used as a vector or point in D dimension, if an
+ *  array like vector is intended use valarray class in STL instead.
+ **/
 template <unsigned D, class T>
 class vec {
 
@@ -84,6 +80,11 @@ public:
 	T sqrl(void) const { return (*this) ^ (*this); }
 	/// @return vector length value
 	T length(void) const { return sqrt( this->sqrl() ); }
+
+	/// Angle between vectors
+	/// @arg v vector to compute the angle with
+	/// @return angle in radians between this vector and v
+	T angle(const vec<D,T>& v) const { return acos( ( (*this) ^ v ) / ( this->sqrl() * v.sqrl() ) ); }
 
 	/// Apply rotation matrix (row-oriented)
 	/// @arg m rotation matrix
@@ -222,14 +223,14 @@ public:
 	}  
 
 	/// I/O operator
-	inline friend ostream& operator << (ostream& out, const vec<D,T>& v) {
+	inline friend std::ostream& operator << (std::ostream& out, const vec<D,T>& v) {
 		if (D==0) return out;
 		for(unsigned i=0; i<D-1; ++i)
 			out << v.coord[i] << " ";
 		out << v.coord[D-1];
 		return out;
 	}
-	inline friend istream& operator >> (istream& in, vec<D,T>& v) {
+	inline friend std::istream& operator >> (std::istream& in, vec<D,T>& v) {
 		for(unsigned i=0; i<D; ++i)
 			in >> v.coord[i];
 		return in;
@@ -242,14 +243,16 @@ public:
 
 };
 
-/// Template function to copy vec values with
-/// different dimensions.
-/// Ex.: vec< 4, int > b(1, 2, 3);
-///      vec< 3, int > a;
-///      copyVec( a, b ); /// a = (1, 2, 3, 0)
-///
-/// @arg v1 receive values from v2
-/// @arg v2 copy values
+/**
+ *    Template function to copy vec values with different dimensions, e.g.:
+ *
+ *   vec< 4, int > b(1, 2, 3);
+ *   vec< 3, int > a;
+ *   copyVec( a, b ); /// a = (1, 2, 3, 0)
+ *
+ * @arg v1 receive values from v2
+ * @arg v2 copy values
+ **/
 template <unsigned D, unsigned D_, class T>
 void copyVec( vec< D, T >& v1, const vec< D_, T >& v2 ) {
 
