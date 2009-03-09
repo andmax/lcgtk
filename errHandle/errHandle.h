@@ -61,7 +61,7 @@ public:
 	errHandle(errType _e, const char* _str) : e(_e), str(_str) { }
 
 	/// Operator to output the error
-	inline friend ostream& operator << (ostream& out, const errHandle& err) {
+	inline friend std::ostream& operator << (std::ostream& out, const errHandle& err) {
 
 		if (err.e == genericErr)
 			out << ( (!err.str) ? "Generic error" : err.str );
