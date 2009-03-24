@@ -102,9 +102,12 @@ public:
 
 	///--- Operators ---
 
+	/// Normal vector
+	/// @return normal vector
+	vec<D,T> normal(void) const { return *this / length(); }
 	/// Normalize vector
 	/// @return normalized vector
-	vec<D,T> normalize(void) { return *this /= length(); }
+	vec<D,T> normalize(void) { return *this = this->normal(); }
 	/// @arg l length used to normalize
 	vec<D,T> normalize(const T& l) { return *this /= l; }
 
@@ -222,7 +225,7 @@ public:
 		return b;
 	}  
 
-	/// I/O operator
+	/// I/O operators
 	inline friend std::ostream& operator << (std::ostream& out, const vec<D,T>& v) {
 		if (D==0) return out;
 		for(unsigned i=0; i<D-1; ++i)
