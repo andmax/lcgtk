@@ -224,6 +224,17 @@ public:
 		for(unsigned i=0; i<D; ++i) b = (b && (v1[i] == v2));
 		return b;
 	}  
+	/// Inequality
+	friend bool operator != ( const vec<D,T>& v1, const vec<D,T>& v2 ) {
+		bool b = true;
+		for(unsigned i=0; i<D; ++i) b = (b && (v1[i] != v2[i]));
+		return b;
+	}  
+	friend bool operator != ( const vec<D,T>& v1, T& v2 ) {
+		bool b = true;
+		for(unsigned i=0; i<D; ++i) b = (b && (v1[i] != v2));
+		return b;
+	}
 
 	/// I/O operators
 	inline friend std::ostream& operator << (std::ostream& out, const vec<D,T>& v) {
