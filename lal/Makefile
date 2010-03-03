@@ -80,23 +80,16 @@ OBJFILES	= .obj/main.o \
 
 .obj/main.o: main.cpp \
 		Point2.hpp \
-		Point2.inline.hpp \
 		Point3.hpp \
-		Point3.inline.hpp \
 		Vector3.hpp \
-		Vector3.inline.hpp \
 		Vector4.hpp \
-		Vector4.inline.hpp \
 		BoundingBox3.hpp \
 		Color.hpp \
 		EigenSystem.hpp \
 		Matrix3x3.hpp \
-		Matrix3x3.inline.hpp \
 		Matrix4x4.hpp \
-		Matrix4x4.inline.hpp \
 		Math.hpp \
-		Quaternion.hpp \
-		Quaternion.inline.hpp 		
+		Quaternion.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/main.o main.cpp
 
 

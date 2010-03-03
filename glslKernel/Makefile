@@ -39,5 +39,5 @@ glslKernel.o: glslKernel.cc glslKernel.h
 	$(CXX) -o glslKernel.o -c $(CXXFLAGS) glslKernel.cc
 
 clean:
-	$(RM) *.a *.o *~
+	$(RM) $(OUTPUT_LIB)/libglslKernel.a *.o *~
 

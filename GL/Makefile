@@ -27,5 +27,4 @@ GLee.o: GLee.c GLee.h
 	$(CC) -o GLee.o -c $(CXXFLAGS) GLee.c
 
 clean:
-	$(RM) *.a *.o *~
-
+	$(RM) $(OUTPUT_LIB)/libGLee.a *.o *~
