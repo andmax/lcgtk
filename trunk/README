@@ -1,0 +1,69 @@
+*************************************************************************
+**                                                                     **
+**                         LCGTK - LCG Toolkit                         **
+**                                                                     **
+**                              README File                            **
+**                                                                     **
+*************************************************************************
+
+    LCGTK is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    LCGTK is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Instalation:
+
+    LCGTK code was written and tested on Linux platform using OpenGL
+    Easy Extension (GLee) for extension functions.  To download and/or
+    see more information about above dependency see:
+
+    GLee: http://www.opengl.org/sdk/libs/GLee
+
+    In order to proper compile the LCGTK code, the GLee should be
+    on a default include directory: GL/.  LCGTK includes a version of
+    GLee in its subdirectory GL/, but without warranty of compatibility.
+    The Makefile in the parent directory or subdirectories can be optionally
+    edited to reflect specific configurations.
+
+Usage:
+
+    LCGTK package is designed to be used externally as a library of codes.
+    To compile the entire package use:
+
+    $ make
+
+    Optionally, each subdirectory have a specific Makefile to compile the
+    corresponding part of LCGTK.
+
+LCGTK:
+
+errHandle/
+
+	includes error handle code.
+
+geomTypes/
+
+	includes geometric types code.
+
+GL/
+	includes GLee library.
+
+glslKernel/
+
+	includes GLSL Kernel for OpenGL Shading Language.
+
+lal/
+
+	includes linear algebra code.
+
+lib/
+
+	includes the output LCGTK libraries.
