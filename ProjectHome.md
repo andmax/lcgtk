@@ -1,0 +1,1 @@
+This project is a repository of source codes used by students of LCG: Computer Graphics Laboratory (www.lcg.ufrj.br) in COPPE/UFRJ (www.coppe.ufrj.br) -- Brazil.  This toolkit repository contains OpenGL and Geometry codes.
